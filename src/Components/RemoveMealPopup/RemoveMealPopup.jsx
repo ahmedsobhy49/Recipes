@@ -4,27 +4,20 @@ import PopupBox from "../PobupBox/PopupBox";
 import "./RemoveMealPopup.css";
 import "../../App.css";
 
-const RemoveMealPopup = ({
-  // isCancel,
-  // isDelete,
-  // isConfirm,
-  setIsCancel,
-  setIsConfirm,
-  setIsDelete,
-}) => {
+const RemoveMealPopup = ({ setIsDelete, onConfirm, mealId, mealTitle }) => {
   return (
     <PopupBox>
       <SlExclamation className="exclamation-icon" />
       <h3 className="confirm-message">
-        Are you sure you want to delete this Recipe !
+        Are you sure you want to <span className="delete-word">delete </span>
+        this Recipe !
       </h3>
-      <p className="meal-title">Meal Title</p>
+      <p className="meal-title">{mealTitle}</p>
       <div className="buttons-container">
         <button
           className="btn delete-btn"
           onClick={() => {
-            setIsConfirm(() => true);
-            setIsDelete(false);
+            onConfirm(mealId);
           }}
         >
           Yes I am sure
@@ -32,7 +25,6 @@ const RemoveMealPopup = ({
         <button
           className="btn cancel-btn"
           onClick={() => {
-            setIsCancel(() => true);
             setIsDelete(false);
           }}
         >
