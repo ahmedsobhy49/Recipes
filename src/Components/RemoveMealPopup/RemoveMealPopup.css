@@ -1,0 +1,36 @@
+.exclamation-icon {
+  font-size: 6rem;
+  font-weight: lighter;
+  color: rgb(206, 55, 14);
+}
+
+.confirm-message {
+  font-size: 1.5rem;
+}
+
+.meal-title {
+  font-size: 1.3rem;
+}
+
+.btn {
+  border: none;
+  font-size: 1rem;
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 0.3rem;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+}
+.buttons-container {
+  display: flex;
+  gap: 3rem;
+}
+
+.delete-btn {
+  background-color: rgb(35, 35, 209);
+}
+
+.cancel-btn {
+  background-color: rgb(206, 55, 14);
+}

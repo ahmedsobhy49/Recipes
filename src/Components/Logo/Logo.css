@@ -1,0 +1,26 @@
+a {
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-name {
+  font-family: fantasy;
+  color: rgb(255, 153, 0);
+  font-size: 3rem;
+  font-weight: bolder;
+}
+
+.logo-image-container {
+  width: 5rem;
+  height: 5rem;
+}
+
+.logo-image-container img {
+  border-radius: 100%;
+  width: 100%;
+}
