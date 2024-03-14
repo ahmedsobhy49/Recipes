@@ -156,3 +156,51 @@ width: 100%;
 // };
 
 // export default MealDetails;
+
+////////////////////
+add new meal component
+
+// useEffect(function () {
+// function handleAddNewIngredient() {
+// console.log(ingredientsInputsContiner);
+// ingredientsInputsContiner.current.insertAdjacentHTML(
+// "beforeend",
+// `<input type="text" />`
+// );
+// }
+// if (addIngredientButton.current) {
+// addIngredientButton.current.addEventListener(
+// "click",
+// handleAddNewIngredient
+// );
+// }
+
+// return () => {
+// if (addIngredientButton.current) {
+// addIngredientButton.current.removeEventListener(
+// "click",
+// handleAddNewIngredient
+// );
+// }
+// };
+// }, []);
+
+// useEffect(function () {
+// function handleAddNewIngredient() {
+// console.log(ingredientsInputsContiner);
+// ingredientsInputsContiner.current.insertAdjacentHTML(
+// "beforeend",
+// `<input type="text" />`
+// );
+// }
+// addIngredientButton.current.addEventListener(
+// "click",
+// handleAddNewIngredient
+// );
+// return () => {
+// addIngredientButton.current.removeEventListener(
+// "click",
+// handleAddNewIngredient
+// );
+// };
+// }, []);

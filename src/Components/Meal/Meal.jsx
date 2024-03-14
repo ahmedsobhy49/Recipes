@@ -7,6 +7,7 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import RemoveMealPopup from "../RemoveMealPopup/RemoveMealPopup";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Meal = ({ meal, setMealsState, mealsState }) => {
   const { idMeal, strMealThumb, strMeal, price } = meal;
@@ -33,11 +34,10 @@ const Meal = ({ meal, setMealsState, mealsState }) => {
           <p className="meal-price">{price}$</p>
         </div>
         <div className="meal-layer">
-          <FontAwesomeIcon
-            icon={faMagnifyingGlass}
-            className="search-icon"
-            type="button"
-          />
+          {/* show meal details btn */}
+          <Link to={{ pathname: "/details", state: { meal } }}>
+            <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" />
+          </Link>
           <FontAwesomeIcon icon={faPenToSquare} className="edit-icon" />
           <FontAwesomeIcon
             icon={faXmark}

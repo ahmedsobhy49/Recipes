@@ -3,11 +3,12 @@
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 0.5rem;
   display: flex;
+  margin-top: 10rem;
 }
 
-.left-side,
-.middle-side,
-.right-side {
+.addnewmeal-left-side,
+.addnewmeal-middle-side,
+.addnewmeal-right-side {
   width: 33.333333333333333%;
   display: flex;
   flex-direction: column;
@@ -15,20 +16,23 @@
   border-right: 1px #e1dcdc solid;
   padding: 3rem;
   overflow: scroll;
-  height: 120vb;
+  max-height: 120vb;
+  height: auto;
 }
 
-.left-side h3 {
+.addnewmeal-left-side h3 {
   font-size: 2rem;
   color: rgb(255, 153, 0);
   letter-spacing: 1px;
 }
+
 .input-container {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1.5rem;
   align-items: flex-start;
 }
+
 label {
   font-size: 1.2rem;
   font-weight: 700;
@@ -56,7 +60,7 @@ label {
   background-color: rgb(245, 235, 221);
   border-right: 3px solid rgb(150, 55, 11);
   padding: 1rem 0.5rem;
-  height: 13rem;
+  min-height: 13rem;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -64,23 +68,39 @@ label {
   margin-bottom: 8px;
 }
 
-.middle-side h3 {
+.addnewmeal-middle-side h3 {
   font-size: 2rem;
   color: rgb(174, 171, 166);
   letter-spacing: 1px;
 }
 
-.middle-side ul {
+.addnewmeal-middle-side ul {
   display: flex;
   flex-direction: column;
   gap: 3rem;
   list-style-type: square;
 }
-.middle-side ul li {
+.addnewmeal-middle-side ul li {
   border-bottom: 1px solid rgb(249, 174, 61);
   padding-bottom: 0.5rem;
 }
 
-.middle-side ul li::marker {
+.addnewmeal-middle-side ul li::marker {
   color: rgb(249, 174, 61);
+}
+.add-new-meal-btn {
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  background-color: rgb(255, 153, 0);
+  color: whitesmoke;
+  transition: all 500ms;
+}
+
+.add-new-meal-btn:hover {
+  background-color: rgb(255, 172, 47);
 }

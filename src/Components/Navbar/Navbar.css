@@ -12,21 +12,21 @@
   z-index: 100;
 }
 
-.left-side ul,
-.right-side ul {
+.navbar-left-side ul,
+.navbar-right-side ul {
   display: flex;
   align-items: center;
   list-style-type: none;
 }
-.left-side ul {
+.navbar-left-side ul {
   gap: 6rem;
 }
 
-.right-side ul {
+.navbar-right-side ul {
   gap: 3rem;
 }
 
-.left-side ul li button {
+.navbar-left-side ul li button {
   border: none;
   border-radius: 0.5rem;
   padding: 0.8rem 1rem;
@@ -35,5 +35,10 @@
   font-weight: bold;
   letter-spacing: 0.1rem;
   background-color: rgb(255, 153, 0);
+  transition: all 500ms;
   color: whitesmoke;
+}
+
+.navbar-left-side ul li button:hover {
+  background-color: rgb(255, 172, 47);
 }
