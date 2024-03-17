@@ -1,10 +1,16 @@
 /* eslint-disable react/prop-types */
-
 import Meal from "../Meal/Meal";
 import "./Meals.css";
 import "../../App.css";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const Meals = ({ mealsState, setMealsState }) => {
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
   return (
     <>
       <div className="meals-container">
@@ -24,37 +30,3 @@ const Meals = ({ mealsState, setMealsState }) => {
 };
 
 export default Meals;
-
-/* eslint-disable react/prop-types */
-
-// import Meal from "../Meal/Meal";
-// import "./Meals.css";
-// import "../../App.css";
-// import { Route, Routes } from "react-router-dom";
-// import MealDetails from "../MealDetails/MealDetails";
-
-// const Meals = ({ mealsState, setMealsState }) => {
-//   return (
-//     <>
-//       <div className="meals-container">
-//         {mealsState.map((meal) => {
-//           return (
-//             <>
-//               <Meal
-//                 key={meal.idMeal}
-//                 meal={meal}
-//                 setMealsState={setMealsState}
-//                 mealsState={mealsState}
-//               />
-//               <Routes>
-//                 <Route path="/details" element={<MealDetails meal={meal} />} />
-//               </Routes>
-//             </>
-//           );
-//         })}
-//       </div>
-//     </>
-//   );
-// };
-
-// export default Meals;

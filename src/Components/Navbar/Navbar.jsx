@@ -13,7 +13,7 @@ const Navbar = () => {
         <ul>
           <Logo />
           <li>
-            <Link to="/addnewmeal">
+            <Link to="/add-new-meal">
               <button className="btn">Add New Recipe</button>
             </Link>
           </li>

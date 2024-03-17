@@ -1,32 +1,54 @@
 /* eslint-disable react/prop-types */
 import "./AddNewMeal.css";
 import "../../App.css";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const AddNewMeal = ({ onAdd }) => {
   const [mealName, setMealName] = useState("");
-  const [mealPriec, setMealPrice] = useState("");
+  const [mealPrice, setMealPrice] = useState("");
   const [mealThumb, setMealThumb] = useState("");
-  const [inputs, setInputs] = useState([{ id: 1, value: "" }]);
+  const [ingInputs, setIngInputs] = useState([{ id: 1, ingredient: "" }]);
+  const [imgFiles, setImgFiles] = useState([]);
   const addIngredientButton = useRef(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleChange = (id, value) => {
-    const updatedInputs = inputs.map((input) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  const handleIngChange = (id, ingredient) => {
+    const updatedIngInputs = ingInputs.map((input) => {
       if (input.id === id) {
-        return { ...input, value };
+        return { ...input, ingredient };
       }
       return input;
     });
-    setInputs(updatedInputs);
+    setIngInputs(updatedIngInputs);
   };
 
   function handleAddNewIngredient(e) {
     e.preventDefault();
+    const newIngInput = {
+      id: ingInputs.length + 1,
+      ingredient: "",
+    };
+    setIngInputs([...ingInputs, newIngInput]);
+  }
+
+  const handleImgChange = (e, id) => {
+    const files = e.target.files;
+    setImgFiles([...imgFiles, { id, file: files[0] }]);
+  };
+
+  function handleAddNewMealPicture(e) {
+    e.preventDefault();
     const newInput = {
-      id: inputs.length + 1,
+      id: imgFiles.length + 1,
       value: "",
     };
-    setInputs([...inputs, newInput]);
+    setImgFiles([...imgFiles, newInput]);
   }
 
   return (
@@ -51,7 +73,7 @@ const AddNewMeal = ({ onAdd }) => {
           <input
             type="text"
             id="meal-price"
-            value={mealPriec}
+            value={mealPrice}
             onChange={(e) => {
               setMealPrice(e.target.value);
               e.preventDefault();
@@ -73,22 +95,30 @@ const AddNewMeal = ({ onAdd }) => {
         </div>
         {/* add images */}
         <div>
-          <div className="input-containe add-bg">
-            <input type="image" />
+          <div className="input-containe add-bg ">
+            {imgFiles.map((input) => (
+              <input
+                key={input.id}
+                type="file"
+                onChange={(e) => handleImgChange(e, input.id)}
+              />
+            ))}
           </div>
-          <button className="add-input-btn">+</button>
+          <button className="add-input-btn" onClick={handleAddNewMealPicture}>
+            +
+          </button>
         </div>
 
         {/* add ingredients */}
         <div>
           <div className="input-container add-bg">
-            {inputs.map((input) => (
+            {ingInputs.map((input) => (
               <input
                 key={input.id}
                 type="text"
                 value={input.value}
                 onChange={(e) => {
-                  handleChange(input.id, e.target.value);
+                  handleIngChange(input.id, e.target.value);
                   e.preventDefault();
                 }}
               />
@@ -106,9 +136,9 @@ const AddNewMeal = ({ onAdd }) => {
       <div className="addnewmeal-middle-side">
         <h3>Ingredients (Preview)</h3>
         <ul>
-          {inputs.map((input) => {
-            if (input.value !== "") {
-              return <li key={input.id}>{input.value}</li>;
+          {ingInputs.map((input) => {
+            if (input.ingredient !== "") {
+              return <li key={input.id}>{input.ingredient}</li>;
             }
           })}
         </ul>
@@ -116,7 +146,10 @@ const AddNewMeal = ({ onAdd }) => {
       <div className="addnewmeal-right-side">
         <button
           className="add-new-meal-btn"
-          onClick={() => onAdd(mealName, mealPriec, mealThumb)}
+          onClick={() => {
+            onAdd(mealName, mealPrice, mealThumb, ingInputs, imgFiles);
+            navigate("/");
+          }}
         >
           Add
         </button>

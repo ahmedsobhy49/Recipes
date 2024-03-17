@@ -34,8 +34,7 @@ const Meal = ({ meal, setMealsState, mealsState }) => {
           <p className="meal-price">{price}$</p>
         </div>
         <div className="meal-layer">
-          {/* show meal details btn */}
-          <Link to={{ pathname: "/details", state: { meal } }}>
+          <Link to={`/meal-details/${strMeal}`} state={meal}>
             <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" />
           </Link>
           <FontAwesomeIcon icon={faPenToSquare} className="edit-icon" />

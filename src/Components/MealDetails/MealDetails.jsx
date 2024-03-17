@@ -2,10 +2,13 @@
 import "./MealDetails.css";
 import "../../App.css";
 import { Carousel } from "react-responsive-carousel";
+import { useLocation } from "react-router-dom";
+const MealDetails = () => {
+  const location = useLocation();
+  const meal = location.state;
 
-const MealDetails = ({ mealsState }) => {
-  const images = mealsState[0].mealPictures;
-  const ingredientsArr = mealsState[0].ingredients;
+  const images = meal.mealPictures;
+  const ingredientsArr = meal.ingredients;
   return (
     <div className="meal-details-contaienr">
       <div className="meal-details-left-side">
@@ -21,10 +24,10 @@ const MealDetails = ({ mealsState }) => {
         </Carousel>
       </div>
       <div className="meal-details-right-side">
-        <h2>Meal title ingredients</h2>
+        <h2>{meal.strMeal} ingredients</h2>
 
         <ul className="ingredients-list">
-          {ingredientsArr.map((ingredientObj, index) => {
+          {ingredientsArr?.map((ingredientObj, index) => {
             const { ingredient, cost } = ingredientObj;
             return (
               <li key={index}>

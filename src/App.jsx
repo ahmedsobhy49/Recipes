@@ -7,15 +7,25 @@ import { useState } from "react";
 import MealDetails from "./Components/MealDetails/MealDetails";
 import AddNewMeal from "./Components/AddNewMeal/AddNewMeal";
 import { Route, Routes } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [mealsState, setMealsState] = useState(meals);
 
-  function handleAddNewMeal(mealName, mealPriec, mealThumb) {
+  function handleAddNewMeal(
+    mealName,
+    mealPrice,
+    mealThumb,
+    ingredients,
+    mealPictures
+  ) {
     const newMeal = {
+      idMeal: uuidv4(),
       strMeal: mealName,
-      price: mealPriec,
+      price: mealPrice,
       strMealThumb: mealThumb,
+      ingredients: ingredients,
+      mealPictures: mealPictures,
     };
     setMealsState([...mealsState, newMeal]);
     console.log(mealsState);
@@ -26,13 +36,10 @@ function App() {
       <Navbar />
       <div className="app-container">
         <Routes>
-          <Route
-            path="/details"
-            element={<MealDetails mealsState={mealsState} />}
-          />
+          <Route path={`/meal-details/:mealtitle`} element={<MealDetails />} />
           {/* AddNewMeal COMP */}
           <Route
-            path="/addnewmeal"
+            path="/add-new-meal"
             element={<AddNewMeal onAdd={handleAddNewMeal} />}
           />
           {/* Meals */}
