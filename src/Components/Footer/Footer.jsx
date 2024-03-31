@@ -4,7 +4,6 @@ const Footer = () => {
   return (
     <div className="footer-container">
       <Logo />
-      <h3>Made with Love</h3>
     </div>
   );
 };

@@ -37,7 +37,9 @@ const Meal = ({ meal, setMealsState, mealsState }) => {
           <Link to={`/meal-details/${strMeal}`} state={meal}>
             <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" />
           </Link>
-          <FontAwesomeIcon icon={faPenToSquare} className="edit-icon" />
+          <Link to={`/update-meal/${strMeal}`} state={meal}>
+            <FontAwesomeIcon icon={faPenToSquare} className="edit-icon" />
+          </Link>
           <FontAwesomeIcon
             icon={faXmark}
             className="delete-icon"

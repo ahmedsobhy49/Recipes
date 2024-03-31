@@ -4,29 +4,35 @@ import "../../App.css";
 import { useRef, useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const AddNewMeal = ({ onAdd }) => {
-  const [mealName, setMealName] = useState("");
-  const [mealPrice, setMealPrice] = useState("");
-  const [mealThumb, setMealThumb] = useState("");
-  const [ingInputs, setIngInputs] = useState([{ id: 1, ingredient: "" }]);
-  const [imgFiles, setImgFiles] = useState([]);
-  const addIngredientButton = useRef(null);
-  const navigate = useNavigate();
+const AddNewMeal = ({ onAdd, onUpdate }) => {
   const location = useLocation();
+  let meal = location.state;
+
+  const [mealName, setMealName] = useState(meal === null ? "" : meal.strMeal);
+
+  const [mealPrice, setMealPrice] = useState(meal === null ? "" : meal.price);
+  const [mealThumb, setMealThumb] = useState(
+    meal === null ? "" : meal.strMealThumb
+  );
+  const [ingInputs, setIngInputs] = useState(
+    meal === null ? [{ id: 1, ingredient: "" }] : meal.ingredients
+  );
+  const [imgInputs, setImgInputs] = useState(
+    meal === null ? [{ id: 1, mealPicture: "" }] : meal.mealPictures
+  );
+  const addIngredientButton = useRef(null);
+  const addIngredientInput = useRef(null);
+  const mealNameInput = useRef(null);
+  const addImgInput = useRef(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    mealNameInput.current.focus();
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
-
-  const handleIngChange = (id, ingredient) => {
-    const updatedIngInputs = ingInputs.map((input) => {
-      if (input.id === id) {
-        return { ...input, ingredient };
-      }
-      return input;
-    });
-    setIngInputs(updatedIngInputs);
-  };
 
   function handleAddNewIngredient(e) {
     e.preventDefault();
@@ -34,22 +40,50 @@ const AddNewMeal = ({ onAdd }) => {
       id: ingInputs.length + 1,
       ingredient: "",
     };
+
     setIngInputs([...ingInputs, newIngInput]);
+    if (ingInputs.ingredient) console.log(newIngInput);
   }
 
-  const handleImgChange = (e, id) => {
-    const files = e.target.files;
-    setImgFiles([...imgFiles, { id, file: files[0] }]);
+  const handleIngChange = (id, ingredient) => {
+    const updatedIngInputs = ingInputs.map((input) => {
+      if (input.id === id) {
+        return { ...input, id, ingredient };
+      }
+      return input;
+    });
+    setIngInputs(updatedIngInputs);
   };
 
-  function handleAddNewMealPicture(e) {
+  function handleAddNewImg(e) {
     e.preventDefault();
-    const newInput = {
-      id: imgFiles.length + 1,
-      value: "",
+    const newImgInput = {
+      id: imgInputs.length + 1,
+      mealPicture: "",
     };
-    setImgFiles([...imgFiles, newInput]);
+    setImgInputs([...imgInputs, newImgInput]);
   }
+
+  const handleImgChange = (id, mealPicture) => {
+    const updatedImgInputs = imgInputs.map((input) => {
+      if (input.id === id) {
+        return { ...input, id, mealPicture };
+      }
+      return input;
+    });
+
+    setImgInputs(updatedImgInputs);
+  };
+
+  useEffect(() => {
+    if (mealNameInput.current.value !== "" && meal === null)
+      addIngredientInput.current.focus();
+  }, [ingInputs, meal]);
+
+  useEffect(() => {
+    if (mealNameInput.current.value !== "" && meal === null)
+      addImgInput.current.focus();
+  }, [imgInputs, meal]);
 
   return (
     <div className="add-new-meal-container">
@@ -60,6 +94,7 @@ const AddNewMeal = ({ onAdd }) => {
           <label htmlFor="meal-name">Meal Name</label>
           <input
             type="text"
+            ref={mealNameInput}
             id="meal-name"
             value={mealName}
             onChange={(e) => {
@@ -80,7 +115,6 @@ const AddNewMeal = ({ onAdd }) => {
             }}
           />
         </div>
-
         <div className="input-container">
           <label htmlFor="meal-thumb">Meal Thumb</label>
           <input
@@ -95,16 +129,24 @@ const AddNewMeal = ({ onAdd }) => {
         </div>
         {/* add images */}
         <div>
-          <div className="input-containe add-bg ">
-            {imgFiles.map((input) => (
+          <div className="input-container add-bg ">
+            <label htmlFor="meal-images">Meal Images</label>
+            {imgInputs.map((input, index) => (
               <input
-                key={input.id}
-                type="file"
-                onChange={(e) => handleImgChange(e, input.id)}
+                id="meal-image"
+                key={index}
+                ref={addImgInput}
+                type="text"
+                value={input.mealPicture}
+                onChange={(e) => {
+                  handleImgChange(input.id, e.target.value);
+                  e.preventDefault();
+                }}
               />
             ))}
           </div>
-          <button className="add-input-btn" onClick={handleAddNewMealPicture}>
+
+          <button className="add-input-btn" onClick={handleAddNewImg}>
             +
           </button>
         </div>
@@ -112,18 +154,24 @@ const AddNewMeal = ({ onAdd }) => {
         {/* add ingredients */}
         <div>
           <div className="input-container add-bg">
-            {ingInputs.map((input) => (
-              <input
-                key={input.id}
-                type="text"
-                value={input.value}
-                onChange={(e) => {
-                  handleIngChange(input.id, e.target.value);
-                  e.preventDefault();
-                }}
-              />
-            ))}
+            <label htmlFor="meal-ingredient">Meal Ingredients</label>
+            {ingInputs.map((input, index) => {
+              return (
+                <input
+                  key={index}
+                  id="meal-ingredient"
+                  ref={addIngredientInput}
+                  type="text"
+                  value={input.ingredient}
+                  onChange={(e) => {
+                    handleIngChange(input.id, e.target.value);
+                    e.preventDefault();
+                  }}
+                />
+              );
+            })}
           </div>
+
           <button
             className="add-input-btn"
             ref={addIngredientButton}
@@ -147,11 +195,22 @@ const AddNewMeal = ({ onAdd }) => {
         <button
           className="add-new-meal-btn"
           onClick={() => {
-            onAdd(mealName, mealPrice, mealThumb, ingInputs, imgFiles);
+            if (meal === null && mealName && mealPrice && ingInputs) {
+              onAdd(mealName, mealPrice, mealThumb, ingInputs, imgInputs);
+            } else {
+              onUpdate(
+                meal.idMeal,
+                mealName,
+                mealPrice,
+                mealThumb,
+                ingInputs,
+                imgInputs
+              );
+            }
             navigate("/");
           }}
         >
-          Add
+          {location.pathname === "/add-new-meal" ? "Add" : "Update"}
         </button>
       </div>
     </div>
