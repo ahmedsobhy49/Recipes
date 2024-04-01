@@ -7,9 +7,12 @@ import AddNewMeal from "./Components/AddNewMeal/AddNewMeal";
 import { Route, Routes } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { useLocalStorage } from "../useLocalStorage";
-
+import { useState } from "react";
+const mealsToEat = [];
+let meaToEatlPrice = 0;
 function App() {
   const [mealsState, setMealsState] = useLocalStorage("meals");
+  const [numOfMeals, setNumOfMeals] = useState(0);
 
   function handleAddNewMeal(
     mealName,
@@ -27,6 +30,16 @@ function App() {
       mealPictures: mealPictures,
     };
     setMealsState([...mealsState, newMeal]);
+  }
+
+  function handleEatToday(id, price) {
+    console.log(id);
+    console.log(mealsToEat);
+    if (!mealsToEat.includes(id)) {
+      mealsToEat.push(id);
+      setNumOfMeals((prev) => prev + 1);
+      meaToEatlPrice += Number(price);
+    }
   }
 
   function handleUpdateMeal(
@@ -62,16 +75,17 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <Navbar numOfMeals={numOfMeals} meaToEatlPrice={meaToEatlPrice} />
       <div className="app-container">
         <Routes>
-          <Route path={`/meal-details/:mealtitle`} element={<MealDetails />} />
-          {/* AddNewMeal COMP */}
+          <Route
+            path={`/meal-details/:mealtitle`}
+            element={<MealDetails handleEatToday={handleEatToday} />}
+          />
           <Route
             path="/add-new-meal"
             element={<AddNewMeal onAdd={handleAddNewMeal} />}
           />
-          {/* Meals */}
           <Route
             path="*"
             element={

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import "./Navbar.css";
 import "../../App.css";
 import Logo from "../Logo/Logo";
@@ -6,7 +7,7 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ numOfMeals, meaToEatlPrice }) => {
   return (
     <div className="navbar-container">
       <div className="navbar-left-side">
@@ -21,10 +22,12 @@ const Navbar = () => {
       </div>
       <div className="navbar-right-side">
         <ul>
-          <li>
+          <li className="meal-ammount-container">
+            <span className="meal-ammount">{numOfMeals}</span>
             <FontAwesomeIcon icon={faCartShopping} fontSize="2.2rem" />
           </li>
-          <li>
+          <li className="meal-costs-container">
+            <span className="meal-costs">{meaToEatlPrice.toFixed(2)}$</span>
             <FontAwesomeIcon icon={faCreditCard} fontSize="2.2rem" />
           </li>
         </ul>
