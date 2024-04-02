@@ -6,7 +6,7 @@ import MealDetails from "./Components/MealDetails/MealDetails";
 import AddNewMeal from "./Components/AddNewMeal/AddNewMeal";
 import { Route, Routes } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { useLocalStorage } from "../useLocalStorage";
+import { useLocalStorage } from "./CustomHooks/useLocalStorage";
 import { useState } from "react";
 const mealsToEat = [];
 let meaToEatlPrice = 0;
@@ -33,8 +33,6 @@ function App() {
   }
 
   function handleEatToday(id, price) {
-    console.log(id);
-    console.log(mealsToEat);
     if (!mealsToEat.includes(id)) {
       mealsToEat.push(id);
       setNumOfMeals((prev) => prev + 1);
@@ -54,23 +52,18 @@ function App() {
       (meal) => meal.idMeal === idMeal
     );
 
-    if (updatedMealIndex !== -1) {
-      const updatedMeal = {
-        ...mealsState[updatedMealIndex],
-        strMeal: mealName,
-        price: mealPrice,
-        strMealThumb: mealThumb,
-        ingredients: ingredients,
-        mealPictures: mealPictures,
-      };
+    const updatedMeal = {
+      ...mealsState[updatedMealIndex],
+      strMeal: mealName,
+      price: mealPrice,
+      strMealThumb: mealThumb,
+      ingredients: ingredients,
+      mealPictures: mealPictures,
+    };
 
-      const updatedMealsState = [...mealsState];
-      updatedMealsState[updatedMealIndex] = updatedMeal;
-
-      setMealsState(updatedMealsState);
-    } else {
-      console.error("Meal not found");
-    }
+    const updatedMealsState = [...mealsState];
+    updatedMealsState[updatedMealIndex] = updatedMeal;
+    setMealsState(updatedMealsState);
   }
 
   return (

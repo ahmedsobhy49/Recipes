@@ -37,14 +37,14 @@
 .meal-title {
   font-size: 1.2rem;
   text-align: center;
-  font-weight: 400;
+  font-weight: 600;
   letter-spacing: 1px;
 }
 
 .meal-price {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 500;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
 
 .meal-layer {

@@ -5,3 +5,9 @@
   justify-content: center;
   padding: 1rem;
 }
+
+.copy-right {
+  font-size: 14px;
+  color: rgb(89, 83, 83);
+  margin-left: 0.6rem;
+}
