@@ -8,6 +8,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import RemoveMealPopup from "../RemoveMealPopup/RemoveMealPopup";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Meal = ({ meal, setMealsState, mealsState }) => {
   const { idMeal, strMealThumb, strMeal, price } = meal;
@@ -21,7 +22,7 @@ const Meal = ({ meal, setMealsState, mealsState }) => {
     const newMealsState = mealsState.filter((meal) => meal.idMeal !== id);
     setMealsState(newMealsState);
     setIsDelete(false);
-    console.log(newMealsState);
+    toast.success(`Meal ${strMeal} Deleted Successfully`);
   }
   return (
     <>

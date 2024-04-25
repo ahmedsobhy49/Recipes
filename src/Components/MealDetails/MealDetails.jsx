@@ -3,6 +3,8 @@ import "./MealDetails.css";
 import "../../App.css";
 import { Carousel } from "react-responsive-carousel";
 import { useLocation } from "react-router-dom";
+import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
+import React from "react";
 
 const MealDetails = ({ handleEatToday }) => {
   const location = useLocation();
@@ -30,10 +32,15 @@ const MealDetails = ({ handleEatToday }) => {
             {ingredientsArr?.map((ingredientObj, index) => {
               const { ingredient, cost } = ingredientObj;
               return ingredient ? (
-                <li key={index} className="ing-item">
-                  {ingredient}
-                  <span className="ingredient-cost"> {cost}$</span>
-                </li>
+                <React.Fragment key={index}>
+                  <li className="ing-item">
+                    <span className="dot">
+                      <MdOutlineKeyboardDoubleArrowRight />
+                    </span>
+                    {ingredient}
+                    <span className="ingredient-cost"> {cost}$</span>
+                  </li>
+                </React.Fragment>
               ) : (
                 ""
               );

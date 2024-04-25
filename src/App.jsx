@@ -8,12 +8,13 @@ import { Route, Routes } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { useLocalStorage } from "./CustomHooks/useLocalStorage";
 import { useState } from "react";
+import { toast } from "react-toastify";
 const mealsToEat = [];
 let meaToEatlPrice = 0;
 function App() {
   const [mealsState, setMealsState] = useLocalStorage("meals");
   const [numOfMeals, setNumOfMeals] = useState(0);
-
+  console.log(mealsState);
   function handleAddNewMeal(
     mealName,
     mealPrice,
@@ -37,6 +38,7 @@ function App() {
       mealsToEat.push(id);
       setNumOfMeals((prev) => prev + 1);
       meaToEatlPrice += Number(price);
+      toast.success("Happy Meal");
     }
   }
 

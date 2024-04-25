@@ -42,6 +42,11 @@ label {
   padding: 0.4rem;
   border: #b9b9b9 1px solid;
   border-radius: 0.2rem;
+  transition: all 200ms;
+}
+.input-container input:focus {
+  outline: none;
+  transform: scale(1.02);
 }
 
 .add-input-btn {
@@ -67,6 +72,7 @@ label {
   flex-direction: column;
   justify-content: start;
   align-items: start;
+  margin-bottom: 1rem;
 }
 
 .addnewmeal-middle-side h3 {
@@ -135,4 +141,33 @@ label {
   color: #b9b9b9;
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+.image-file-input {
+  display: none;
+}
+
+.image-file-input-label {
+  font-size: 0.9rem;
+  background-color: rgb(255, 153, 0);
+  color: white;
+  font-weight: 400;
+  padding: 0.25rem 0.8rem;
+  cursor: pointer;
+  letter-spacing: 1px;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.image-preview {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.one-image-input {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 0.3rem;
 }
