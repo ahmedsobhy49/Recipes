@@ -15,7 +15,7 @@ const MealDetails = ({ handleEatToday }) => {
     <>
       <div className="meal-details-contaienr">
         <div className="meal-details-left-side">
-          <Carousel infiniteLoop={true}>
+          <Carousel infiniteLoop={false}>
             {imagesArr.map((image, index) => {
               const { mealPicture } = image;
               return (

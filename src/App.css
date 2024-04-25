@@ -20,3 +20,7 @@ body {
   gap: 6rem;
   min-height: 100vh;
 }
+
+/* .Toastify__toast-body div {
+  color: #dfd1d1 !important;
+} */

@@ -1,8 +1,13 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 
+// function ImagePreview({ src }) {
+//   return <img className="image-preview" src={src} alt="Image preview" />;
+// }
+
 function AddMealImages({ imgInputs, setImgInputs }) {
-  const [imagePreviewSrcs, setImagePreviewSrcs] = useState([]); //
+  const [imagePreviewSrcs, setImagePreviewSrcs] = useState([]);
+
   const handleImgChange = (id, file) => {
     const reader = new FileReader();
     reader.onload = () => {
@@ -30,7 +35,7 @@ function AddMealImages({ imgInputs, setImgInputs }) {
     setImgInputs([...imgInputs, newImgInput]);
     setImagePreviewSrcs((prevSrcs) => [...prevSrcs, ""]);
   };
-  //
+
   return (
     <div>
       <div className="input-container add-bg ">
@@ -50,19 +55,19 @@ function AddMealImages({ imgInputs, setImgInputs }) {
               accept="image/*"
               onChange={(e) => handleImgChange(input.id, e.target.files[0])}
             />
-            {imagePreviewSrcs[index] && (
-              <img
-                className="image-preview"
-                src={imagePreviewSrcs[index]}
-                alt={`Image preview ${index + 1}`}
-              />
-            )}
+            {imagePreviewSrcs[index] && <span>✅</span>}
           </div>
         ))}
       </div>
       <button className="add-input-btn" onClick={handleAddNewImg}>
         +
       </button>
+      {/* <div className="images-preview-container">
+        {imagePreviewSrcs.map(
+          (src, index) =>
+            imagePreviewSrcs[index] && <ImagePreview key={index} src={src} />
+        )}
+      </div> */}
     </div>
   );
 }

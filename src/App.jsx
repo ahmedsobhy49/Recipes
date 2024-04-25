@@ -14,7 +14,7 @@ let meaToEatlPrice = 0;
 function App() {
   const [mealsState, setMealsState] = useLocalStorage("meals");
   const [numOfMeals, setNumOfMeals] = useState(0);
-  console.log(mealsState);
+
   function handleAddNewMeal(
     mealName,
     mealPrice,
